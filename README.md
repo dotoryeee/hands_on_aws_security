@@ -12,4 +12,17 @@
     - 다른 AWS계정일 경우 policy와 trust relationshopt두 가지 모두 설정 필요하다.<br>
     (역할을 수임할 계정에 policy설정 + 수임당할 Role의 trust relationship에 허용할 pricipal을 명시)
 
+- alias
+    ```s
+    cat<<EOF >> ~/.zshrc
+    alias tf='terraform fmt; terraform'
+    alias tfp='terraform fmt; terraform plan'
+    alias tfa='terraform fmt; terraform apply'
+    alias tfaa='terraform fmt; terraform apply -auto-approve'
+    alias tfd='terraform fmt; terraform destroy'
+    alias tfda='terraform fmt; terraform destroy -auto-approve'
+    ```
 
+- Resource / Data source
+    - Resource의 경우 awscli에서 바로 사용할 수 있는 json 형식으로 리소스를 선언할 수 있지만 Terraform에서 검증 기능이 약함(effect: Allowwww 등도 허용됨)
+    - Data source의 경우 Terraform에서 제공하는 만큼 데이터 검증이 강화되어있으나, 컨벤션이 AWS와 맞지않고, Data source가 다른 Resource에 적용(attach 등)되지 않으면 실제로 동작하지 않음(iam_policy_document 생성 후 Role이나 User에 attach하지 않으면 iam_policy가 생성되지 않음)
