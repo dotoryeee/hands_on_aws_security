@@ -9,7 +9,8 @@ resource "aws_iam_role" "test_role_01" {
         Effect = "Allow"
         Sid    = ""
         Principal = {
-          Service = "ec2.amazonaws.com"
+          # Service = "ec2.amazonaws.com"
+          AWS = aws_iam_user.test_import.arn #test_import USER에 assume_role 권한 부여
         }
       },
     ]
